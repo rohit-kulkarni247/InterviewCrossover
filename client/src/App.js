@@ -1,9 +1,10 @@
 import "./App.css";
+import Signup from "./components/singup";
 
 function App() {
   return (
     <div>
-      <h1>Hello, world!</h1>
+      <Signup />
     </div>
   );
 }
