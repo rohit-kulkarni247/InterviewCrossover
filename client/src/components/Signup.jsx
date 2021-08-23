@@ -4,8 +4,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
@@ -32,13 +30,14 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage:
+      "url(https://cdni.iconscout.com/illustration/premium/thumb/man-trying-to-login-in-his-account-3406108-2840402.png)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
-    backgroundSize: "cover",
+    backgroundSize: "auto",
     backgroundPosition: "center",
   },
   paper: {
@@ -63,6 +62,39 @@ const useStyles = makeStyles((theme) => ({
 export default function Signup() {
   const classes = useStyles();
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const changeName = (e) => {
+    setName(e.target.value);
+  };
+  const changeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const changePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name === "" || email === "" || password === "") {
+      alert("Please fill in all fields");
+    } else {
+      const user = { fullname: name, email: email, password: password };
+      axios
+        .post("http://localhost:5000/auth/signup", user)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          alert(err);
+          console.log(err);
+        });
+      console.log(name, email, password);
+    }
+  };
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -73,9 +105,22 @@ export default function Signup() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign Up
           </Typography>
           <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="FullName"
+              name="FullName"
+              autoComplete="FullName"
+              autoFocus
+              onChange={changeName}
+            />
+
             <TextField
               variant="outlined"
               margin="normal"
@@ -85,7 +130,7 @@ export default function Signup() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              onChange={changeEmail}
             />
             <TextField
               variant="outlined"
@@ -97,10 +142,7 @@ export default function Signup() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              onChange={changePassword}
             />
             <Button
               type="submit"
@@ -108,8 +150,9 @@ export default function Signup() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleSubmit}
             >
-              Sign In
+              Sign Up
             </Button>
             <Grid container>
               <Grid item xs>
@@ -119,7 +162,7 @@ export default function Signup() {
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"Already have an Account? Login Here"}
                 </Link>
               </Grid>
             </Grid>
@@ -132,73 +175,3 @@ export default function Signup() {
     </Grid>
   );
 }
-
-// function Signup() {
-//   const [name, setName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   //   const [password2, setPassword2] = useState("");
-
-//   const changeName = (e) => {
-//     setName(e.target.value);
-//   };
-//   const changeEmail = (e) => {
-//     setEmail(e.target.value);
-//   };
-//   const changePassword = (e) => {
-//     setPassword(e.target.value);
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (name === "" || email === "" || password === "") {
-//       alert("Please fill in all fields");
-//     } else {
-//       alert("Success!");
-//       const user = { fullname: name, email: email, password: password };
-//       axios
-//         .post("http://localhost:5000/auth/signup", user)
-//         .then((res) => {
-//           console.log(res);
-//         })
-//         .catch((err) => {
-//           console.log(err);
-//         });
-//       console.log(name, email, password);
-//     }
-//   };
-//   return (
-//     <div className="main">
-//       <Box
-//         display="flex"
-//         justifyContent="center"
-//         m={1}
-//         p={1}
-//         bgcolor="background.paper"
-//       >
-//         <form>
-//           <h1>Signup</h1>
-//           <label htmlFor="Name">FullName</label>
-//           <input type="text" onChange={changeName} />
-//           <br />
-//           <label htmlFor="Email">Email</label>
-//           <input type="email" onChange={changeEmail} />
-//           <br />
-//           <label htmlFor="Password">Password</label>
-//           <input type="password" onChange={changePassword} />
-//           <br />
-//           <Button
-//             variant="contained"
-//             color="primary"
-//             type="submit"
-//             onClick={handleSubmit}
-//           >
-//             Signup
-//           </Button>
-//         </form>
-//       </Box>
-//     </div>
-//   );
-// }
-
-// export default Signup;
