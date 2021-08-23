@@ -64,6 +64,37 @@ const useStyles = makeStyles((theme) => ({
 export default function Signup() {
   const classes = useStyles();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const changeEmail = (e) => {
+    setEmail(e.target.value);
+    console.log(e.target.value);
+  };
+  const changePassword = (e) => {
+    setPassword(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email === "" || password === "") {
+      alert("Please fill in all fields");
+    } else {
+      alert("Success!");
+      const user = { email: email, password: password };
+      axios
+        .post("http://localhost:5000/auth/login", user)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log(email, password);
+    }
+  };
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -74,7 +105,7 @@ export default function Signup() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Login
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -87,6 +118,7 @@ export default function Signup() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={changeEmail}
             />
             <TextField
               variant="outlined"
@@ -98,6 +130,7 @@ export default function Signup() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={changePassword}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -109,8 +142,9 @@ export default function Signup() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleSubmit}
             >
-              Sign In
+              Login
             </Button>
             <Grid container>
               <Grid item xs>
