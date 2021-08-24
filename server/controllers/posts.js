@@ -22,3 +22,14 @@ export const getUserPosts = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+export const getCompanyPosts = async (req, res) => {
+  const data = await Experience.find({
+    companyName: req.body.companyName,
+  }).exec();
+  try {
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};

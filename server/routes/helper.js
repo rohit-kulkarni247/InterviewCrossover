@@ -1,7 +1,11 @@
 import express from "express";
 
 import { signup, login, getUsers } from "../controllers/auth.js";
-import { getAllPosts, getUserPosts } from "../controllers/posts.js";
+import {
+  getAllPosts,
+  getUserPosts,
+  getCompanyPosts,
+} from "../controllers/posts.js";
 
 const router = express.Router();
 
@@ -13,5 +17,6 @@ router.get("/getallposts", getAllPosts);
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/userpost", getUserPosts);
+router.post("/companypost", getCompanyPosts);
 
 export default router;
