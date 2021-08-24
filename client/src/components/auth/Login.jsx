@@ -69,11 +69,9 @@ export default function Signup() {
 
   const changeEmail = (e) => {
     setEmail(e.target.value);
-    console.log(e.target.value);
   };
   const changePassword = (e) => {
     setPassword(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -91,7 +89,6 @@ export default function Signup() {
         .catch((err) => {
           console.log(err);
         });
-      console.log(email, password);
     }
   };
 
@@ -114,10 +111,11 @@ export default function Signup() {
               required
               fullWidth
               id="email"
+              value={email}
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              // autoFocus
               onChange={changeEmail}
             />
             <TextField
@@ -125,6 +123,7 @@ export default function Signup() {
               margin="normal"
               required
               fullWidth
+              value={password}
               name="password"
               label="Password"
               type="password"
