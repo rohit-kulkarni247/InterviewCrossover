@@ -7,6 +7,6 @@ const experienceSchema = new mongoose.Schema({
   dateOfUpload: Date,
 });
 
-const Experience = new mongoose.model("InterviewCreator", experienceSchema);
+const Experience = new mongoose.model("Experience", experienceSchema);
 
 export default Experience;
