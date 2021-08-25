@@ -3,7 +3,7 @@ import Login from "./components/auth/Login";
 import Landing from "./components/Landing";
 import Profile from "./components/Profile";
 import GetPosts from "./components/GetPosts";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/UI/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {

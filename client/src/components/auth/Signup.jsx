@@ -27,7 +27,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh",
+    height: "91vh",
   },
   image: {
     backgroundImage:
@@ -117,7 +117,6 @@ export default function Signup() {
               label="FullName"
               name="FullName"
               autoComplete="FullName"
-              autoFocus
               onChange={changeName}
             />
 
