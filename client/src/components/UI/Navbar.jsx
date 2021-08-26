@@ -38,6 +38,13 @@ function Navbar() {
             Interview Crossover
           </Typography>
           <Link
+            to="/getallposts"
+            style={{ textDecoration: "none", color: "#FFF" }}
+            color="inherit"
+          >
+            <Button color="inherit">Experiences</Button>
+          </Link>
+          <Link
             to="/login"
             style={{ textDecoration: "none", color: "#FFF" }}
             color="inherit"

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function GetPosts() {
   const [data, dataHandler] = useState([]);
@@ -21,11 +22,13 @@ function GetPosts() {
   };
   return (
     <div>
-      {data.map(function (post, index) {
+      {data.map(function (post) {
         return (
-          <div key={index}>
-            <h1>{post.companyName}</h1>
-            <p>{post.dateOfUpload}</p>
+          <div key={post._id}>
+            <Link to={`/post/${post._id}`}>
+              <h1>{post.companyName}</h1>
+              <p>{post.dateOfUpload}</p>
+            </Link>
             <hr></hr>
           </div>
         );
