@@ -25,7 +25,7 @@ export const getUserPosts = async (req, res) => {
 
 export const getCompanyPosts = async (req, res) => {
   const data = await Experience.find({
-    companyName: req.body.companyName,
+    _id: req.body.companyId,
   }).exec();
   try {
     res.status(200).json(data);
