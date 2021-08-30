@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { Redirect } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -66,6 +67,7 @@ export default function Signup() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [logstate, setLogstate] = useState(false);
 
   const changeEmail = (e) => {
     setEmail(e.target.value);
@@ -74,25 +76,27 @@ export default function Signup() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
       alert("Please fill in all fields");
     } else {
-      alert("Success!");
       const user = { email: email, password: password };
-      axios
+      await axios
         .post("http://localhost:5000/auth/login", user)
         .then((res) => {
           localStorage.setItem("token", res.data.token);
-          // console.log(res.data.token);
+          console.log(res.data.token);
         })
         .catch((err) => {
           console.log(err);
         });
+      setLogstate(true);
     }
   };
-
+  if (logstate) {
+    return <Redirect to="/next" />;
+  }
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
