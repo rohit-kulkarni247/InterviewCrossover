@@ -84,7 +84,8 @@ export default function Signup() {
       axios
         .post("http://localhost:5000/auth/login", user)
         .then((res) => {
-          console.log(res);
+          localStorage.setItem("token", res.data.token);
+          // console.log(res.data.token);
         })
         .catch((err) => {
           console.log(err);
