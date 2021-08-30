@@ -53,11 +53,9 @@ export const login = async (req, res) => {
       );
       res.status(200).json({ user, token });
     } else {
-      console.log("password does not match");
       res.sendStatus(401);
     }
   } else {
-    console.log("user does not exist");
     res.sendStatus(404);
   }
 };

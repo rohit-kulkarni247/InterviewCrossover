@@ -14,11 +14,11 @@ const router = express.Router();
 //get methods
 router.get("/getallusers", getUsers);
 router.get("/getallposts", getAllPosts);
+router.get("/userpost", auth, getUserPosts);
 
 //post methods
 router.post("/signup", signup);
 router.post("/login", login);
-router.post("/userpost", auth, getUserPosts);
 router.post("/companypost", getCompanyPosts);
 
 export default router;

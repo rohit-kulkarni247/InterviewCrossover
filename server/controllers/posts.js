@@ -20,7 +20,7 @@ export const getUserPosts = async (req, res) => {
   }
 
   const user = await InterviewCreator.findOne({
-    email: req.body.email,
+    email: req.userId.email,
   }).exec();
   const data = await Experience.find({ userEmail: user.email }).exec();
   try {
