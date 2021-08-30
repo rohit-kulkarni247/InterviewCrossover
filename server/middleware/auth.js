@@ -7,7 +7,7 @@ const auth = async (req, res, next) => {
       token,
       "asdkjfqlwqn123894asdkjlfkb21983hncanskdj1i324rasdbjkf89yt5wh7g"
     );
-    req.user = decoded;
+    req.userId = decoded;
     next();
   } catch (err) {
     res.status(401).json({ msg: "Not authorized to access this route" });
