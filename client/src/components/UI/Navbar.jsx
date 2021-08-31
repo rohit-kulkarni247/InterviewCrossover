@@ -51,13 +51,6 @@ function Navbar() {
           >
             <Button color="inherit">Login</Button>
           </Link>
-          <Link
-            to="/signup"
-            style={{ textDecoration: "none", color: "#FFF" }}
-            color="inherit"
-          >
-            <Button color="inherit">Singup</Button>
-          </Link>
         </Toolbar>
       </AppBar>
     </div>
