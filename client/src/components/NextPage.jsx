@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 // const result = axios
 //   .get("http://localhost:5000/auth/userpost", {
@@ -17,6 +18,9 @@ import axios from "axios";
 function NextPage() {
   //   const [userPosts, setUserPosts] = useState({});
   //   setUserPosts(result);
+  if (!localStorage.getItem("token")) {
+    return <Redirect to="/login" />;
+  }
 
   return <div>hello</div>;
 }
