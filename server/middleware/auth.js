@@ -1,12 +1,10 @@
 import jwt from "jsonwebtoken";
+import {} from "dotenv/config";
 
 const auth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(
-      token,
-      "asdkjfqlwqn123894asdkjlfkb21983hncanskdj1i324rasdbjkf89yt5wh7g"
-    );
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = decoded;
     next();
   } catch (err) {

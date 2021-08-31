@@ -1,7 +1,7 @@
 import express from "express";
-import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import {} from "dotenv/config";
 
 import InterviewCreator from "../models/user.js";
 
@@ -28,7 +28,7 @@ export const signup = async (req, res) => {
         email: reactuser.email,
         userId: reactuser._id,
       },
-      "asdkjfqlwqn123894asdkjlfkb21983hncanskdj1i324rasdbjkf89yt5wh7g",
+      process.env.JWT_SECRET,
       {
         expiresIn: "1h",
       }
@@ -48,7 +48,7 @@ export const login = async (req, res) => {
     if (isMatch) {
       const token = jwt.sign(
         { email: user.email, id: user._id },
-        "asdkjfqlwqn123894asdkjlfkb21983hncanskdj1i324rasdbjkf89yt5wh7g",
+        process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
       res.status(200).json({ user, token });

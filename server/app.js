@@ -1,6 +1,6 @@
 //jshint version:6
 
-// require('dotenv').config();
+import {} from "dotenv/config";
 import express from "express";
 import bodyparser from "body-parser";
 import mongoose from "mongoose";
@@ -21,7 +21,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use("/auth", UserRoute);
 
-mongoose.connect("mongodb://localhost:27017/interviewcrossover", {
+mongoose.connect(`${process.env.MONGODB_URI}`, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
