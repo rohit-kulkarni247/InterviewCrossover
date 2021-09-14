@@ -27,7 +27,7 @@ function Navbar() {
     <div className={classes.root}>
       <AppBar
         position="static"
-        style={{ background: "transparent", boxShadow: "none" }}
+        style={{ background: "white", boxShadow: "none" }}
       >
         <Toolbar>
           <IconButton edge="start" className={classes.logo} aria-label="menu">

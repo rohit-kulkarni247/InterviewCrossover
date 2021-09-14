@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "./UI/Navbar";
-import "./Landing.css";
 import laptop from "../laptop.png";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
