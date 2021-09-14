@@ -22,7 +22,7 @@ function GetPosts() {
   };
   return (
     <div>
-      {data.map(function (post) {
+      {/* {data.map(function (post) {
         return (
           <div key={post._id}>
             <Link to={`/post/${post._id}`}>
@@ -33,6 +33,8 @@ function GetPosts() {
           </div>
         );
       })}
+       */}
+      hi
     </div>
   );
 }

@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "black",
   },
 }));
 
@@ -24,14 +25,12 @@ function Navbar() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        style={{ background: "transparent", boxShadow: "none" }}
+      >
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.logo}
-            color="inherit"
-            aria-label="menu"
-          >
+          <IconButton edge="start" className={classes.logo} aria-label="menu">
             <DeckSharpIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
@@ -39,14 +38,14 @@ function Navbar() {
           </Typography>
           <Link
             to="/getallposts"
-            style={{ textDecoration: "none", color: "#FFF" }}
+            style={{ textDecoration: "none", color: "black" }}
             color="inherit"
           >
             <Button color="inherit">Experiences</Button>
           </Link>
           <Link
             to="/login"
-            style={{ textDecoration: "none", color: "#FFF" }}
+            style={{ textDecoration: "none", color: "black" }}
             color="inherit"
           >
             <Button color="inherit">Login</Button>

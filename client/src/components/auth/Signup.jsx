@@ -88,8 +88,10 @@ export default function Signup() {
           console.log(res);
         })
         .catch((err) => {
-          alert(err);
-          console.log(err);
+          if (err.response.status === 400) {
+            alert("email id already exists");
+            console.log(err);
+          }
         });
       console.log(name, email, password);
     }

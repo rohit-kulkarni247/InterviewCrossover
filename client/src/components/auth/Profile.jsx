@@ -15,14 +15,12 @@ import { Redirect } from "react-router-dom";
 //     console.log(err);
 //   });
 
-function NextPage() {
-  //   const [userPosts, setUserPosts] = useState({});
-  //   setUserPosts(result);
+function Profile() {
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
 
-  return <div>hello</div>;
+  return <div></div>;
 }
 
-export default NextPage;
+export default Profile;
