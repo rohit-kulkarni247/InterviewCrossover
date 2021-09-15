@@ -3,6 +3,7 @@ import Navbar from "./UI/Navbar";
 import laptop from "../laptop.png";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import CardInfo from "./UI/CardInfo";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,6 +37,14 @@ function Landing() {
           </Grid>
         </Grid>
       </div>
+      <Grid container spacing={8}>
+        <Grid item xs={3}>
+          <CardInfo />
+        </Grid>
+        <Grid item xs={3}>
+          <CardInfo />
+        </Grid>
+      </Grid>
     </div>
   );
 }
