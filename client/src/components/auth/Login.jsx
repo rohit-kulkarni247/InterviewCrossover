@@ -87,7 +87,7 @@ export default function Signup() {
     }
   };
   if (logstate) {
-    return <Redirect to="/next" />;
+    return <Redirect to="/profile" />;
   }
   disableBodyScroll(document.body);
   return (
