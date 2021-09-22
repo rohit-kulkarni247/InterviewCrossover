@@ -2,19 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
-// const result = axios
-//   .get("http://localhost:5000/auth/userpost", {
-//     headers: {
-//       Authorization: `Bearer ${localStorage.getItem("token")}`,
-//     },
-//   })
-//   .then((res) => {
-//     console.log(res);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
 function Profile() {
   var token = localStorage.getItem("token");
 
@@ -35,8 +22,8 @@ function Profile() {
   }
 
   return (
-    <div>
-      <h1>Hello {user.fullname}</h1>
+    <div style={{ textAlign: "center" }}>
+      <h1> {user.fullname}</h1>
     </div>
   );
 }

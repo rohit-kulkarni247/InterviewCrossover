@@ -45,6 +45,13 @@ function Landing() {
           <CardInfo />
         </Grid>
       </Grid>
+      <form>
+        <script
+          src="https://checkout.razorpay.com/v1/payment-button.js"
+          data-payment_button_id="pl_HzBC0zvisy2gx6"
+          async
+        ></script>
+      </form>
     </div>
   );
 }
