@@ -10,7 +10,8 @@ import login from "../../laptop.png";
 import { CardContent } from "@material-ui/core";
 
 function Profile() {
-  var token = localStorage.getItem("token");
+  const [experiences, setExperiences] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   var base64Url = token.split(".")[1];
   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -25,16 +26,19 @@ function Profile() {
   let user = JSON.parse(jsonPayload);
   console.log(user);
 
-  axios
-    .get("http://localhost:5000/auth/userpost", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:5000/auth/userpost", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setExperiences(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
@@ -69,13 +73,18 @@ function Profile() {
                 Add Experience
               </Button>
             </div>
-            <div style={{ margin: "1%" }}>
-              <Card>
-                <CardContent>
-                  <h3>Experience</h3>
-                </CardContent>
-              </Card>
-            </div>
+            {experiences.map((experience) => {
+              return (
+                <div style={{ margin: "1%" }}>
+                  <Card>
+                    <CardContent>
+                      <h3>{experience.companyName}</h3>
+                      <h4>{experience.dateOfUpload}</h4>
+                    </CardContent>
+                  </Card>
+                </div>
+              );
+            })}
           </Grid>
         </Grid>
       </Container>
