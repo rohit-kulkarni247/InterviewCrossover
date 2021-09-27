@@ -4,8 +4,10 @@ import { Redirect } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
 import "./Profile.css";
 import login from "../../laptop.png";
+import { CardContent } from "@material-ui/core";
 
 function Profile() {
   var token = localStorage.getItem("token");
@@ -22,6 +24,18 @@ function Profile() {
   );
   let user = JSON.parse(jsonPayload);
   console.log(user);
+
+  axios
+    .get("http://localhost:5000/auth/userpost", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
@@ -36,7 +50,7 @@ function Profile() {
               alt="profile"
               style={{
                 borderRadius: "50%",
-                height: "50%",
+                height: "350px",
                 backgroundColor: "black",
               }}
               onClick={() => {
@@ -46,7 +60,7 @@ function Profile() {
             <h1>{user.fullname}</h1>
           </Grid>
           <Grid item xs={8}>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", margin: "1%" }}>
               <Button
                 variant="contained"
                 color="primary"
@@ -55,7 +69,13 @@ function Profile() {
                 Add Experience
               </Button>
             </div>
-            <h1>hello</h1>
+            <div style={{ margin: "1%" }}>
+              <Card>
+                <CardContent>
+                  <h3>Experience</h3>
+                </CardContent>
+              </Card>
+            </div>
           </Grid>
         </Grid>
       </Container>

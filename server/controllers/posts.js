@@ -12,7 +12,6 @@ export const getAllPosts = async (req, res) => {
 };
 
 export const getUserPosts = async (req, res) => {
-  console.log(req.userId);
   if (!req.userId) {
     res.status(401).json({
       message: "Unauthorized",
