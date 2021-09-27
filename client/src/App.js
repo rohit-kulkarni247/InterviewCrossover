@@ -3,7 +3,7 @@ import Login from "./components/auth/Login";
 import Landing from "./components/Landing";
 import GetPosts from "./components/GetPosts";
 import GetIndivisualPost from "./components/GetIndivisualPost";
-import Profile from "./components/auth/Profile";
+import Profile from "./components/UserProfile/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
