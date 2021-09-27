@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "../UI/Navbar";
+import { Redirect } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -66,6 +67,7 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signState, setSignState] = useState(false);
 
   const changeName = (e) => {
     setName(e.target.value);
@@ -87,6 +89,7 @@ export default function Signup() {
         .post("http://localhost:5000/auth/signup", user)
         .then((res) => {
           console.log(res);
+          setSignState(true);
         })
         .catch((err) => {
           if (err.response.status === 400) {
@@ -94,9 +97,13 @@ export default function Signup() {
             console.log(err);
           }
         });
+
       console.log(name, email, password);
     }
   };
+  if (signState) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div>

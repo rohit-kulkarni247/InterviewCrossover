@@ -79,11 +79,12 @@ export default function Signup() {
         .then((res) => {
           localStorage.setItem("token", res.data.token);
           console.log(res.data.token);
+          setLogstate(true);
         })
         .catch((err) => {
           console.log(err);
+          alert("Invalid email or password");
         });
-      setLogstate(true);
     }
   };
   if (logstate) {
