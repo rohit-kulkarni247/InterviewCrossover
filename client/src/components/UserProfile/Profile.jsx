@@ -54,7 +54,7 @@ function Profile() {
               alt="profile"
               style={{
                 borderRadius: "50%",
-                height: "350px",
+                height: "320px",
                 backgroundColor: "black",
               }}
               onClick={() => {
@@ -64,7 +64,7 @@ function Profile() {
             <h1>{user.fullname}</h1>
           </Grid>
           <Grid item xs={8}>
-            <div style={{ display: "flex", margin: "1%" }}>
+            <div style={{ display: "flex", margin: "2%" }}>
               <Button
                 variant="contained"
                 color="primary"
@@ -75,11 +75,15 @@ function Profile() {
             </div>
             {experiences.map((experience) => {
               return (
-                <div style={{ margin: "1%" }}>
-                  <Card>
+                <div style={{ margin: "2%" }} key={experience._id}>
+                  <Card
+                    onClick={() => {
+                      console.log("clicked " + experience._id);
+                    }}
+                  >
                     <CardContent>
                       <h3>{experience.companyName}</h3>
-                      <h4>{experience.dateOfUpload}</h4>
+                      <h4>{experience.dateOfUpload.substring(0, 10)}</h4>
                     </CardContent>
                   </Card>
                 </div>
