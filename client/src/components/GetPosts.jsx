@@ -8,25 +8,21 @@ import { Link } from "react-router-dom";
 
 function GetPosts() {
   const [data, dataHandler] = useState([]);
-  const [companyId, setCompanyId] = useState(0);
+  const [companyId, setCompanyId] = useState("");
   const [indivisual, setIndivisual] = useState([]);
 
-  const handleChange = (event) => {
-    setCompanyId(event.target.value);
-
-    console.log(event.target.value);
-
-    axios
+  const handleChange = async (event) => {
+    const getcompanyName = await axios
       .post("http://localhost:5000/auth/companypost", {
         companyId: event.target.value,
       })
       .then((res) => {
-        setIndivisual(res.data);
-        console.log(indivisual);
-      })
-      .catch((err) => {
-        console.log(err);
+        return res.data;
+        // console.log(res.data);
       });
+    setCompanyId(event.target.value);
+    setIndivisual(getcompanyName);
+    // console.log(companyId, indivisual);
   };
 
   useEffect(() => {
@@ -44,6 +40,7 @@ function GetPosts() {
         console.log(error);
       });
   };
+  // console.log(companyId, indivisual);
   return (
     <div>
       <FormControl
@@ -64,40 +61,44 @@ function GetPosts() {
           label="companyId"
           onChange={handleChange}
         >
-          {indivisual.length == 0
-            ? data.map((item) => {
-                return (
-                  <MenuItem key={item._id} value={item._id}>
-                    {item.companyName}
-                  </MenuItem>
-                );
-              })
-            : indivisual.map((item) => {
-                return (
-                  <MenuItem key={item._id} value={item._id}>
-                    {item.companyName}
-                  </MenuItem>
-                );
-              })}
-          {/* <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem> */}
+          {data.map((item) => {
+            return (
+              <MenuItem key={item._id} value={item._id}>
+                {item.companyName}
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
-      {data.map(function (post) {
-        return (
-          <div key={post._id}>
-            <Link
-              to={`/post/${post._id}`}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <h1>{post.companyName}</h1>
-              <p>{post.dateOfUpload}</p>
-            </Link>
-            <hr></hr>
-          </div>
-        );
-      })}
+      {indivisual.length === 0
+        ? data.map(function (post) {
+            return (
+              <div key={post._id}>
+                <Link
+                  to={`/post/${post._id}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <h1>{post.companyName}</h1>
+                  <p>{post.dateOfUpload}</p>
+                </Link>
+                <hr></hr>
+              </div>
+            );
+          })
+        : indivisual.map(function (post) {
+            return (
+              <div key={post._id}>
+                <Link
+                  to={`/post/${post._id}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <h1>{post.companyName}</h1>
+                  <p>{post.dateOfUpload}</p>
+                </Link>
+                <hr></hr>
+              </div>
+            );
+          })}
 
       {/* hi */}
     </div>
