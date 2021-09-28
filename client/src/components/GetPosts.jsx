@@ -8,10 +8,11 @@ import { Link } from "react-router-dom";
 
 function GetPosts() {
   const [data, dataHandler] = useState([]);
-  const [age, setAge] = useState(0);
+  const [companyId, setCompanyId] = useState(0);
+  const [indivisual, setIndivisual] = useState([]);
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setCompanyId(event.target.value);
 
     console.log(event.target.value);
 
@@ -20,7 +21,8 @@ function GetPosts() {
         companyId: event.target.value,
       })
       .then((res) => {
-        console.log(res.data);
+        setIndivisual(res.data);
+        console.log(indivisual);
       })
       .catch((err) => {
         console.log(err);
@@ -58,17 +60,25 @@ function GetPosts() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
-          label="Age"
+          value={companyId}
+          label="companyId"
           onChange={handleChange}
         >
-          {data.map((item) => {
-            return (
-              <MenuItem key={item._id} value={item._id}>
-                {item.companyName}
-              </MenuItem>
-            );
-          })}
+          {indivisual.length == 0
+            ? data.map((item) => {
+                return (
+                  <MenuItem key={item._id} value={item._id}>
+                    {item.companyName}
+                  </MenuItem>
+                );
+              })
+            : indivisual.map((item) => {
+                return (
+                  <MenuItem key={item._id} value={item._id}>
+                    {item.companyName}
+                  </MenuItem>
+                );
+              })}
           {/* <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem> */}
