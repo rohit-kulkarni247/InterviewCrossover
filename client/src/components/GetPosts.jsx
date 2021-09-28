@@ -25,7 +25,10 @@ function GetPosts() {
       {data.map(function (post) {
         return (
           <div key={post._id}>
-            <Link to={`/post/${post._id}`}>
+            <Link
+              to={`/post/${post._id}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
               <h1>{post.companyName}</h1>
               <p>{post.dateOfUpload}</p>
             </Link>
