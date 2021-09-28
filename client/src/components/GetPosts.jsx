@@ -8,11 +8,23 @@ import { Link } from "react-router-dom";
 
 function GetPosts() {
   const [data, dataHandler] = useState([]);
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = useState(0);
 
   const handleChange = (event) => {
     setAge(event.target.value);
-    console.log(age);
+
+    console.log(event.target.value);
+
+    axios
+      .post("http://localhost:5000/auth/companypost", {
+        companyId: event.target.value,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -20,7 +32,7 @@ function GetPosts() {
   }, []);
 
   const getPosts = async () => {
-    axios
+    await axios
       .get("http://localhost:5000/auth/getallposts")
       .then(function (response) {
         // console.log(response);
@@ -32,7 +44,11 @@ function GetPosts() {
   };
   return (
     <div>
-      <FormControl variant="standard" style={{ display: "flex", width: "30%" }}>
+      <FormControl
+        margin="none"
+        variant="standard"
+        style={{ display: "flex", width: "30%" }}
+      >
         <InputLabel
           id="demo-simple-select-label"
           style={{ marginLeft: "auto" }}
@@ -48,7 +64,9 @@ function GetPosts() {
         >
           {data.map((item) => {
             return (
-              <MenuItem value={item.companyName}>{item.companyName}</MenuItem>
+              <MenuItem key={item._id} value={item._id}>
+                {item.companyName}
+              </MenuItem>
             );
           })}
           {/* <MenuItem value={10}>Ten</MenuItem>
