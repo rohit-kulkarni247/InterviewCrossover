@@ -12,6 +12,7 @@ import { CardContent } from "@material-ui/core";
 function Profile() {
   const [experiences, setExperiences] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [loginImage, setLoginImage] = useState(login);
 
   var base64Url = token.split(".")[1];
   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -24,7 +25,7 @@ function Profile() {
       .join("")
   );
   let user = JSON.parse(jsonPayload);
-  console.log(user);
+  // console.log(user);
 
   React.useEffect(() => {
     axios
@@ -33,7 +34,7 @@ function Profile() {
       })
       .then((res) => {
         setExperiences(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -43,24 +44,36 @@ function Profile() {
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
-
+  const imageUpload = (e) => {
+    console.log(e.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setLoginImage(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
   return (
     <div style={{ margin: "5%" }}>
       <Container maxWidth="lg">
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <img
-              src={login}
+              src={loginImage}
               alt="profile"
+              id="profile"
               style={{
                 borderRadius: "50%",
                 height: "320px",
+                width: "320px",
                 backgroundColor: "black",
               }}
               onClick={() => {
                 console.log("clicked");
               }}
             />
+            <input type="file" onChange={imageUpload} accept="image/*" />
             <h1>{user.fullname}</h1>
           </Grid>
           <Grid item xs={8}>

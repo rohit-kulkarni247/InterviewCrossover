@@ -79,7 +79,7 @@ function GetPosts() {
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   <h1>{post.companyName}</h1>
-                  <p>{post.dateOfUpload}</p>
+                  <p>{post.dateOfUpload.substring(0, 10)}</p>
                 </Link>
                 <hr></hr>
               </div>
@@ -93,7 +93,7 @@ function GetPosts() {
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   <h1>{post.companyName}</h1>
-                  <p>{post.dateOfUpload}</p>
+                  <p>{post.dateOfUpload.substring(0, 10)}</p>
                 </Link>
                 <hr></hr>
               </div>
