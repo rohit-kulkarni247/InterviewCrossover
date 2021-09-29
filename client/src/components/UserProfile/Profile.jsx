@@ -44,7 +44,7 @@ function Profile() {
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
-  const imageUpload = (e) => {
+  const imageUpload = async (e) => {
     console.log(e.target.files[0]);
     const reader = new FileReader();
     reader.onload = () => {
@@ -52,6 +52,19 @@ function Profile() {
         setLoginImage(reader.result);
       }
     };
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]);
+    const result = await axios.post(
+      "http://localhost:5000/auth/getimage",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log(result.data);
+
     reader.readAsDataURL(e.target.files[0]);
   };
   return (

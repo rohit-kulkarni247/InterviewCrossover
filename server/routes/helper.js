@@ -20,5 +20,6 @@ router.get("/userpost", auth, getUserPosts);
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/companypost", getCompanyPosts);
+// router.post("/getimage", getImage);
 
 export default router;

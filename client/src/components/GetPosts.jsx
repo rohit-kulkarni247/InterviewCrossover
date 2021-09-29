@@ -4,6 +4,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function GetPosts() {
@@ -40,6 +41,10 @@ function GetPosts() {
         console.log(error);
       });
   };
+
+  const allExperiences = () => {
+    setIndivisual(data);
+  };
   // console.log(companyId, indivisual);
   return (
     <div>
@@ -69,6 +74,7 @@ function GetPosts() {
             );
           })}
         </Select>
+        <Button onClick={allExperiences}>Show all Experiences</Button>
       </FormControl>
       {indivisual.length === 0
         ? data.map(function (post) {

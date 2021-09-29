@@ -5,10 +5,12 @@ import express from "express";
 import bodyparser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+import fileUpload from "express-fileupload";
 
 import UserRoute from "./routes/helper.js";
 
 const app = express();
+// app.use(fileUpload);
 app.use(cors());
 
 // app.use(express.static("public"));
