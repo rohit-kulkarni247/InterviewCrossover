@@ -10,7 +10,7 @@ import fileUpload from "express-fileupload";
 import UserRoute from "./routes/helper.js";
 
 const app = express();
-// app.use(fileUpload);
+app.use(fileUpload());
 app.use(cors());
 
 // app.use(express.static("public"));

@@ -8,6 +8,9 @@ import InterviewCreator from "../models/user.js";
 
 const router = express.Router();
 
+const app = express();
+app.use(fileUpload());
+
 export const signup = async (req, res) => {
   const { fullname, email, password } = req.body;
   const candidate = await InterviewCreator.findOne({ email });
@@ -62,20 +65,20 @@ export const login = async (req, res) => {
   }
 };
 
-// export const getImage = async (req, res) => {
-//   if (req.files === null) {
-//     return res.status(400).json({ msg: "No file was uploaded" });
-//   }
-//   const file = req.files.file;
-//   file.mv(`${__dirname}/server/public/${file.name}`, (err) => {
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).send(err);
-//     }
+export const getImage = async (req, res) => {
+  if (req.files === null) {
+    return res.status(400).json({ msg: "No file was uploaded" });
+  }
+  const file = req.files.file;
+  file.mv(`./public/${file.name}`, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
 
-//     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
-//   });
-// };
+    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+  });
+};
 
 export const getUsers = async (req, res) => {
   const users = await InterviewCreator.find({}).exec();

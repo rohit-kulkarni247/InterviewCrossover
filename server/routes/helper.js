@@ -1,6 +1,6 @@
 import express from "express";
 
-import { signup, login, getUsers } from "../controllers/user.js";
+import { signup, login, getUsers, getImage } from "../controllers/user.js";
 import {
   getAllPosts,
   getUserPosts,
@@ -20,6 +20,6 @@ router.get("/userpost", auth, getUserPosts);
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/companypost", getCompanyPosts);
-// router.post("/getimage", getImage);
+router.post("/getimage", getImage);
 
 export default router;
