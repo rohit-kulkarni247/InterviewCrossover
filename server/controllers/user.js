@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import fileUpload from "express-fileupload";
 import {} from "dotenv/config";
+import atob from "atob";
 
 import InterviewCreator from "../models/user.js";
 
@@ -66,6 +67,21 @@ export const login = async (req, res) => {
 };
 
 export const getImage = async (req, res) => {
+  // console.log(req.headers);
+
+  var base64Url = req.headers.authorization.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+  let user = JSON.parse(jsonPayload);
+  console.log(user.email);
+
   if (req.files === null) {
     return res.status(400).json({ msg: "No file was uploaded" });
   }
@@ -76,8 +92,16 @@ export const getImage = async (req, res) => {
       return res.status(500).send(err);
     }
 
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    // res.json({ fileName: file.name, filePath: `./public/${file.name}` });
   });
+  InterviewCreator.findOneAndUpdate(
+    { email: user.email },
+    { imagePath: `./public/${file.name}` },
+    function (err, doc) {
+      if (err) return res.send(500, { error: err });
+      return res.send("succesfully saved");
+    }
+  );
 };
 
 export const getUsers = async (req, res) => {

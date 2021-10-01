@@ -45,7 +45,7 @@ function Profile() {
     return <Redirect to="/login" />;
   }
   const imageUpload = async (e) => {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
@@ -54,11 +54,13 @@ function Profile() {
     };
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
+
     const result = await axios.post(
       "http://localhost:5000/auth/getimage",
       formData,
       {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       }
