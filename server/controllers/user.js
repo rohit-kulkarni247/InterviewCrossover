@@ -53,7 +53,12 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(req.body.password, user.password);
     if (isMatch) {
       const token = jwt.sign(
-        { email: user.email, fullname: user.fullname, id: user._id },
+        {
+          email: user.email,
+          fullname: user.fullname,
+          id: user._id,
+          img: user.imagePath,
+        },
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
@@ -86,7 +91,7 @@ export const getImage = async (req, res) => {
     return res.status(400).json({ msg: "No file was uploaded" });
   }
   const file = req.files.file;
-  file.mv(`./public/${file.name}`, (err) => {
+  file.mv(`../client/public/images/${file.name}`, (err) => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);
